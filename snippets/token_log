@@ -1,0 +1,39 @@
+"access":eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTcyNTAwNDM1LCJqdGkiOiJiNDI2NGQ2ZGE3NmU0ZDBkOWZjZjdmOTNlMWY1Mjc1OSIsInVzZXJfaWQiOjF9.XyclVWAIOOgU76sPnc4PBr9VIPW_E4pcn5Vcz6r5GVo
+
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+->base64 de ->
+{"typ":"JWT","alg":"HS256"}
+
+"typ":类型
+"alg":加密方式
+
+eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTcyNTAwNDM1LCJqdGkiOiJiNDI2NGQ2ZGE3NmU0ZDBkOWZjZjdmOTNlMWY1Mjc1OSIsInVzZXJfaWQiOjF9
+->base64 de ->
+{"token_type":"access","exp":1572500435,"jti":"b4264d6da76e4d0d9fcf7f93e1f52759","user_id":1}
+"token_type":token类型
+"exp":过期时间
+"jti":
+"user_id":
+
+"refresh": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTU3MjU4NjUzNSwianRpIjoiODVhNWY5MmYxYjY4NDNiZWIwYzcwNjEyNGRjOTBlYzkiLCJ1c2VyX2lkIjoxfQ.oj1-QapbfH9iTMPCpQX6jM3R05s0HIk0_JZVHfCoORo"
+->base64 de ->
+{"typ":"JWT","alg":"HS256"}
+{"token_type":"refresh","exp":1572586535,"jti":"85a5f92f1b6843beb0c706124dc90ec9","user_id":1}
+
+#这两个的过期时间不一样。
+# "refresh"中的exp是token刷新的时间。
+# "access"中的exp是token过期时间。
+# 默认过期时间是5分钟。刷新时间是一天。
+
+# token过期后进行访问。返回结果。
+{
+    "detail": "Given token not valid for any token type",
+    "code": "token_not_valid",
+    "messages": [
+        {
+            "token_class": "AccessToken",
+            "token_type": "access",
+            "message": "Token is invalid or expired"
+        }
+    ]
+}
