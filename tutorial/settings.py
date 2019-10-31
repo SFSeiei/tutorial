@@ -47,14 +47,22 @@ REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
 
-    # Cannot apply DjangoModelPermissionsOrAnonReadOnly on a view that does not set `.queryset` or have a `.get_queryset()` method.
+    # 这个设置默认的许可方式。
     'DEFAULT_PERMISSION_CLASSES': [
 
         # 设置permision classes 则会报该异常：
+        # Cannot apply DjangoModelPermissionsOrAnonReadOnly on a view that does not set `.queryset` or have a `.get_queryset()` method.
         # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
 
-        # 引入simplejwt验证模块，用于JWT验证
-        'rest_framework_simplejwt.authentication.JWTAuthentication'
+        # sjango中没有common模块。
+        # 'common.permissions.IsAuthenticated',
+    ],
+
+    # 这个设置默认的授权方式。
+    # 设置不对会报以下异常：
+    # 'JWTAuthentication' object has no attribute 'has_permission'
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
 
     # Use Django's pagination 'rest_framework.pagination.PageNumberPagination'
@@ -152,7 +160,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# simplejwt验证，自定义设置
+# 配置A JSON Web Token authentication plugin
+# simplejwt验证设置。
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=7),  # access_token的持续时间
     'REFRESH_TOKEN_LIFETIME': timedelta(days=7),  # refresh_token的持续时间

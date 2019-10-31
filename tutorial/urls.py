@@ -15,6 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+
+# jwt插件导入的包。
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+    TokenVerifyView,
+)
+
 # 第一种设计而导入的包。
 # from django.conf.urls import url, include
 # from django.contrib.auth.models import User
@@ -63,6 +71,14 @@ urlpatterns = [
 
     # 在项目的主路由中，把app中的snippets的路由包含进来。
     path('', include('snippets.urls')),
+
+    # jwt插件的token路由。
+    # 获取token路由
+    path(r'api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    # 刷新token路由
+    path(r'api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    # 验证token路由
+    path(r'api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
 ]
 
 # urlpatterns = [

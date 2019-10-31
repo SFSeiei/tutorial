@@ -278,3 +278,15 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+
+# 测试simplejwt的views
+from rest_framework_simplejwt import authentication
+
+
+class TestView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = (authentication.JWTAuthentication,)
+
+    def get(self, request, *args, **kwargs):
+        return Response('ok')
